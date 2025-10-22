@@ -1,0 +1,51 @@
+import java.util.Scanner;
+import java.text.DecimalFormat;
+
+public class ConversorDeTemperatura {
+
+    public static void main(String[] args) {
+        // Objeto Scanner para receber a entrada do usuário
+        Scanner scanner = new Scanner(System.in);
+        
+        // Objeto DecimalFormat para formatar a saída com precisão de duas casas decimais
+        // Isso ajuda a manter a clareza e precisão dos resultados, como 298.15 K
+        DecimalFormat df = new DecimalFormat("0.00");
+
+        System.out.println("--- Conversor de Temperaturas ---");
+        System.out.print("Digite a temperatura em graus Celsius (°C): ");
+
+        // Variável para armazenar a temperatura em Celsius
+        double celsius = 0.0;
+        
+        // Verificação para garantir que a entrada seja um número
+        if (scanner.hasNextDouble()) {
+            celsius = scanner.nextDouble();
+        } else {
+            System.out.println("Erro: Entrada inválida. Por favor, digite um número para a temperatura.");
+            // Encerra o programa se a entrada for inválida
+            scanner.close();
+            return;
+        }
+
+        // --- CÁLCULOS DE CONVERSÃO ---
+
+        // 1. Conversão para Fahrenheit (°F)
+        // Fórmula: Fahrenheit (°F) = (Celsius (°C) × 9/5) + 32
+        // É importante usar 9.0/5.0 para garantir a divisão de ponto flutuante (double)
+        double fahrenheit = (celsius * (9.0 / 5.0)) + 32;
+
+        // 2. Conversão para Kelvin (K)
+        // Fórmula: Kelvin (K) = Celsius (°C) + 273.15
+        double kelvin = celsius + 273.15;
+
+
+        // --- APRESENTAÇÃO DOS RESULTADOS ---
+        
+        System.out.println("\n-------------------------------------------");
+        System.out.println("               RESULTADOS");
+        System.out.println("-------------------------------------------");
+        
+        // Apresenta a temperatura original
+        System.out.println("Temperatura em Celsius: " + df.format(celsius) + " °C");
+        
+        // Apresenta a temperatura convert
