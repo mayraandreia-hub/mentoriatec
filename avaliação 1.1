@@ -1,0 +1,80 @@
+import java.util.Scanner;
+
+public class CalculadoraMediasEscolares {
+
+    public static void main(String[] args) {
+        // Objeto Scanner para receber a entrada do usuário
+        Scanner scanner = new Scanner(System.in);
+
+        // Array para armazenar as 8 notas anuais
+        double[] notas = new double[8];
+
+        System.out.println("--- Sistema de Cálculo de Médias Escolares ---");
+        System.out.println("Por favor, digite as 8 notas anuais:");
+
+        // Laço para solicitar e armazenar as 8 notas
+        for (int i = 0; i < 8; i++) {
+            // Ajusta o índice para exibir o número da nota de 1 a 8
+            int numeroNota = i + 1;
+            System.out.print("Nota " + numeroNota + " (Bimestre " + ((i / 2) + 1) + "): ");
+            // Garante que a entrada seja um número decimal (double)
+            if (scanner.hasNextDouble()) {
+                notas[i] = scanner.nextDouble();
+            } else {
+                System.out.println("Entrada inválida. Por favor, digite um número.");
+                // Limpa o buffer do scanner para evitar loop infinito em caso de erro
+                scanner.next();
+                i--; // Decrementa 'i' para repetir a solicitação desta nota
+            }
+        }
+
+        // --- CÁLCULOS ---
+
+        // Médias Bimestrais
+        double mediaBim1 = (notas[0] + notas[1]) / 2.0;
+        double mediaBim2 = (notas[2] + notas[3]) / 2.0;
+        double mediaBim3 = (notas[4] + notas[5]) / 2.0;
+        double mediaBim4 = (notas[6] + notas[7]) / 2.0;
+
+        // Médias Semestrais
+        double mediaSem1 = (mediaBim1 + mediaBim2) / 2.0;
+        double mediaSem2 = (mediaBim3 + mediaBim4) / 2.0;
+
+        // Média Final (Pode ser calculada de duas formas: média das 8 notas ou média dos 2 semestres)
+        // Usaremos a média das 8 notas para maior precisão, mas é igual à média dos 4 bimestres ou dos 2 semestres.
+        double somaTotal = 0;
+        for (double nota : notas) {
+            somaTotal += nota;
+        }
+        double mediaFinal = somaTotal / 8.0;
+
+
+        // --- APRESENTAÇÃO DOS RESULTADOS ---
+
+        // Configura o formato para exibir apenas uma casa decimal
+        java.text.DecimalFormat df = new java.text.DecimalFormat("0.0");
+
+        System.out.println("\n-------------------------------------------");
+        System.out.println("               RESULTADOS");
+        System.out.println("-------------------------------------------");
+
+        // 1º Semestre
+        System.out.println("1º Bimestre: " + df.format(mediaBim1));
+        System.out.println("2º Bimestre: " + df.format(mediaBim2));
+        System.out.println("1º Semestre: " + df.format(mediaSem1));
+        System.out.println("-----------------------");
+
+        // 2º Semestre
+        System.out.println("3º Bimestre: " + df.format(mediaBim3));
+        System.out.println("4º Bimestre: " + df.format(mediaBim4));
+        System.out.println("2º Semestre: " + df.format(mediaSem2));
+        System.out.println("-----------------------");
+
+        // Média Final
+        System.out.println("Média Final: " + df.format(mediaFinal));
+        System.out.println("-------------------------------------------");
+
+        // Fecha o objeto Scanner
+        scanner.close();
+    }
+}
